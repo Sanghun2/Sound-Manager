@@ -1,0 +1,15 @@
+﻿{
+  "name": "com.billiotgames.soundmanager",
+  "version": "1.0.0",
+  "displayName": "Sound Manager",
+  "description": "Sound를 관리하고 Play하는 Manager입니다.",
+  "unity": "6000.2",
+  "author": {
+    "name": "Billiot Games",
+    "url": "https://github.com/Sanghun2/Sound-Manager"
+  },
+  "keywords": [
+    "Sound",
+    "Manager"
+  ]
+}
