@@ -29,6 +29,12 @@ namespace BilliotGames
             sourceContainer.InitContainer(sourceStrategy, poolCount);
         }
 
+        public void RegisterSound(string soundID, AudioClip clip) {
+            clips[soundID] = clip;
+        }
+        public void UnregisterSound(string soundID) {
+            clips.Remove(soundID);
+        }
         public void PlaySound(string soundID, Sound.Type type=Sound.Type.SFX) {
             if (TryGetClip(soundID, out AudioClip clip)) {
                 var container = type == Sound.Type.BGM ? bgmSourceContainer : sfxSourceContainer;
