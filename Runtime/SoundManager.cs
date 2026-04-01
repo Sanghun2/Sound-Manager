@@ -14,19 +14,25 @@ namespace BilliotGames
     public class SoundManager
     {
         private Dictionary<string, AudioClip> clips = new();
-        private AudioSourceContainerBase sourceContainer;
+        private AudioSourceContainerBase sfxSourceContainer;
+        private AudioSourceContainerBase bgmSourceContainer;
 
-        public void SetSourceContainer(AudioSourceContainerBase sourceContainer) {
-            this.sourceContainer = sourceContainer;
-            sourceContainer.InitContainer();
-        }
         public void ClearClips() {
             clips.Clear();
+        }
+        public void SetSFXSourceContainer(AudioSourceContainerBase sourceContainer, ISourceStrategy sourceStrategy, int poolCount) {
+            sfxSourceContainer = sourceContainer;
+            sourceContainer.InitContainer(sourceStrategy, poolCount);
+        }
+        public void SetBGMSourceContainer(AudioSourceContainerBase sourceContainer, ISourceStrategy sourceStrategy, int poolCount) {
+            bgmSourceContainer = sourceContainer;
+            sourceContainer.InitContainer(sourceStrategy, poolCount);
         }
 
         public void PlaySound(string soundID, Sound.Type type=Sound.Type.SFX) {
             if (TryGetClip(soundID, out AudioClip clip)) {
-                sourceContainer.PlaySound(clip);
+                var container = type == Sound.Type.BGM ? bgmSourceContainer : sfxSourceContainer;
+                container.PlaySound(clip);
             }
             else {
                 Debug.LogError($"<color=red>({soundID})에 해당하는 clip 없음</color>");
