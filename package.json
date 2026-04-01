@@ -1,6 +1,6 @@
 ﻿{
   "name": "com.billiotgames.soundmanager",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "displayName": "Sound Manager",
   "description": "Sound를 관리하고 Play하는 Manager입니다.",
   "unity": "6000.2",

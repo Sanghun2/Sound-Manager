@@ -16,6 +16,7 @@ namespace BilliotGames
         private Dictionary<string, AudioClip> clips = new();
         private AudioSourceContainerBase sfxSourceContainer;
         private AudioSourceContainerBase bgmSourceContainer;
+        private IClipLoader clipLoader;
 
         public void ClearClips() {
             clips.Clear();
@@ -27,6 +28,9 @@ namespace BilliotGames
         public void SetBGMSourceContainer(AudioSourceContainerBase sourceContainer, ISourceStrategy sourceStrategy, int poolCount) {
             bgmSourceContainer = sourceContainer;
             sourceContainer.InitContainer(sourceStrategy, poolCount);
+        }
+        public void SetClipLoader(IClipLoader clipLoader) {
+            this.clipLoader = clipLoader;
         }
 
         public void RegisterSound(string soundID, AudioClip clip) {
@@ -46,7 +50,18 @@ namespace BilliotGames
         }
 
         private bool TryGetClip(string soundID, out AudioClip clip) {
-            return clips.TryGetValue(soundID, out clip);
+            if (clips.TryGetValue(soundID, out clip)) {
+                return true;
+            }
+
+            clip = clipLoader.LoadClip(soundID);
+            if (clip != null) {
+                RegisterSound(soundID, clip);
+                return true;
+            }
+
+            Debug.LogError($"<color=red>no audio clip named ({soundID}) exist</color>");
+            return false;
         }
     }
 }
