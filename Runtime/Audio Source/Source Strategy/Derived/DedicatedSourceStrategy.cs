@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class DedicatedSource : ISourceStrategy
+public class DedicatedSourceStrategy : ISourceStrategy
 {
     private AudioSource bgmSource;
 
