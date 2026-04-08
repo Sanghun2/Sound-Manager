@@ -11,6 +11,10 @@ public class ResourceClipLoader : IClipLoader
         this.baseSoundPath = baseSoundPath;
     }
 
+    public AudioClip[] LoadAllClips(string resourcePath) {
+        return Resources.LoadAll<AudioClip>(resourcePath);
+    }
+
     public AudioClip LoadClip(string soundID) {
         pathBuilder.Clear();
         pathBuilder.Append(baseSoundPath).Append('/').Append(soundID);

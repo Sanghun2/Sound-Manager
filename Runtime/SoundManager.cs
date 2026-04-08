@@ -18,6 +18,13 @@ namespace BilliotGames
         private AudioSourceContainerBase bgmSourceContainer;
         private IClipLoader clipLoader;
 
+        public void InitClips(string resourcePath) {
+            var clips = clipLoader.LoadAllClips(resourcePath);
+            for (int i = 0; i < clips.Length; i++) {
+                var clip = clips[i];
+                RegisterSound(clip.name, clip);
+            }
+        }
         public void ClearClips() {
             clips.Clear();
         }
