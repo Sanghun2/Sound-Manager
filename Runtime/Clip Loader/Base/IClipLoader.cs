@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 
-public interface IClipLoader
+namespace BilliotGames
 {
-    AudioClip[] LoadAllClips(string resourcePath);
-    AudioClip LoadClip(string soundID);
+    public interface IClipLoader
+    {
+        AudioClip[] LoadAllClips(string resourcePath);
+        AudioClip LoadClip(string soundID);
+    }
 }
