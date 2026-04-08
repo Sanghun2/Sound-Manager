@@ -19,7 +19,10 @@ namespace BilliotGames
         private IClipLoader clipLoader;
 
         public void InitClips(string resourcePath) {
+            if (clipLoader == null) { Debug.LogError($"<color=red>clip loader is null</color>"); return; }
+
             var clips = clipLoader.LoadAllClips(resourcePath);
+            Debug.Log($"{clips.Length}");
             for (int i = 0; i < clips.Length; i++) {
                 var clip = clips[i];
                 RegisterSound(clip.name, clip);
